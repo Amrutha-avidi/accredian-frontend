@@ -36,13 +36,15 @@ const ReferralForm = ({ onClose }) => {
   // Handle Form Submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const url = `${import.meta.env.VITE_API_URL}/api/referral`
+    console.log(url)
     try {
-      const response = await fetch("http://localhost:5000/api/referral", {
+      const response = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
+      console.log(response)
       const data = await response.json();
       if (response.ok) {
         alert("Referral submitted successfully!");
@@ -59,8 +61,8 @@ const ReferralForm = ({ onClose }) => {
   return (
     <div className="flex flex-col md:flex-row justify-center gap-5 mt-4">
       <h2 className="block md:hidden text-3xl font-bold text-center text-[#1A202C]">
-          Refer a <span className="text-blue-600">Friend</span>
-        </h2>
+        Refer a <span className="text-blue-600">Friend</span>
+      </h2>
       <img
         src={refer_and_earn}
         className="hidden md:block md:w-[520px] md:h-[380px]"
